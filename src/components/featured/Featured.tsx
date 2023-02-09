@@ -1,15 +1,43 @@
 import { InfoOutlined, PlayArrow } from "@mui/icons-material";
 import "./featured.scss";
+import { useEffect, useState } from "react";
+import axios from "axios";
+import { movieItemProps } from "../modelsProps/modelMovie";
 interface Props{
     type?: string;
 }
 
-const Featured :React.FC<Props> = ({ type }) => {
+const Featured: React.FC<Props> = ({ type }) => {
+  const [content, setContent] = useState<movieItemProps>({})
+
+  useEffect(() => {
+    const getRandomContent = async () => {
+      try {
+        const res = await axios.get('movies/random?type:' + type, {
+          headers: {
+            token:
+              "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzZTJiMGRhYmJiMThhNGU2Y2ViNWMyNSIsImlzQWRtaW4iOnRydWUsImlhdCI6MTY3NTg5ODY1NywiZXhwIjoxNjc1OTg1MDU3fQ.g5l0cO5KHpoQYPMxRKcNI_0MWpmw_hN9XkOF_jNU9r0",
+          },
+        })
+
+        setContent(res.data[0]);
+        console.log(res.data)
+        
+      } catch (e) {
+        console.log(e);
+      }
+      
+    
+    }
+    getRandomContent();
+}, [type])
+
+  
   return (
     <div className="featured">
       {type && (
         <div className="category">
-                  <span>{type === "movie" ? "Movie" : "Series"}</span>
+                  <span>{type === "movies" ? "Movies" : "Series"}</span>
                   <select name="genre" id="genre">
                       <option value="comedy">Comedy</option>
                       <option value="crime">Crime</option>
@@ -27,20 +55,18 @@ const Featured :React.FC<Props> = ({ type }) => {
         </div>
       )}
       <img
-        src="https://upload.wikimedia.org/wikipedia/it/thumb/5/5c/Oxyg%C3%A8ne_%28film%29.png/2560px-Oxyg%C3%A8ne_%28film%29.png"
+        src={content.img}
         alt=""
       />
       <div className="info">
         <img
-          src="https://occ-0-2901-784.1.nflxso.net/dnm/api/v6/tx1O544a9T7n8Z_G12qaboulQQE/AAAABRIc52fmNOGRmQmGWFVzgJKBQh7ua05BJyHQrl9xaqBTFcoMnE5oWkPcOHf8Yt6sEcLHt4wHVjj1Ikv6THKOPoZX3Ove0LHaPC1y6iImZjVohB1fLxQupv3drzrZWXcmVh9oo_QiwCIdzjQvMSbg-SlfDxBjVt7IVylj2eZGYFjVOgCXAp48dQ.png?r=46e"
+          src={content.imgTitle}
           alt=""
         />
 
         <span className="desc">
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minus
-          dolores nobis fuga asperiores ratione consectetur dolore vero
-          consequatur, sunt nam quidem doloremque expedita quaerat eligendi modi
-          distinctio quo magnam esse?
+
+          {content.desc}
         </span>
         <div className="buttons">
           <button className="play">

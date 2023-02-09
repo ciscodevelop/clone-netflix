@@ -6,8 +6,8 @@ import "./list.scss";
 import ListItem from "../listItem/ListItem";
 import { useEffect, useRef, useState } from "react";
 
-const List = () => {
-   
+const List = ({movieLists}:any) => {
+ 
     const containerRef: any = useRef();
     const [distance, setDistance] = useState(0);
     // const itemsCount = 14;
@@ -42,7 +42,7 @@ const List = () => {
 
   return (
     <div className="list">
-      <span className="list-title">Continue to Watch</span>
+      <span className="list-title">{movieLists.title}</span>
       <div className="wrapper">
         <ArrowBackIosNewOutlined
           className="slider-arrow left"
@@ -50,17 +50,10 @@ const List = () => {
                   style={isMoved ? { display: 'block' } : { display: 'none' }}
         />
         <div className="container" ref={containerRef}>
-          <ListItem index={0}/>
-          <ListItem index={1}/>
-          <ListItem index={2}/>
-          <ListItem index={3}/>
-          <ListItem index={4}/>
-          <ListItem index={5}/>
-          <ListItem index={6}/>
-          <ListItem index={7}/>
-          <ListItem index={8}/>
-          <ListItem index={9}/>
-          <ListItem index={10}/>
+          {movieLists&& movieLists.content.map((listItem:any,i:any) =>
+            <ListItem index={i} key={i} item={listItem } />
+        )}
+         
          
           
         </div>
