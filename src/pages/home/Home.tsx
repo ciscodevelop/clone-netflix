@@ -16,7 +16,7 @@ const Home: React.FC<Props> = ({ type }) => {
       const res = await axios.get("lists", {
         headers: {
           token:
-            "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzZTJiMGRhYmJiMThhNGU2Y2ViNWMyNSIsImlzQWRtaW4iOnRydWUsImlhdCI6MTY3NTg5ODY1NywiZXhwIjoxNjc1OTg1MDU3fQ.g5l0cO5KHpoQYPMxRKcNI_0MWpmw_hN9XkOF_jNU9r0",
+            "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzZTJiMGRhYmJiMThhNGU2Y2ViNWMyNSIsImlzQWRtaW4iOnRydWUsImlhdCI6MTY3NTk4NzA3NCwiZXhwIjoxNjc2MDczNDc0fQ.p7E5w8R-a6XD5NT--qkXGXWa0d-i2-S_FexC9zouJDo",
         },
       });
       setMovieLists(res.data);

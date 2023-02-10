@@ -11,23 +11,8 @@ import { Link } from "react-router-dom";
 import { movieItemProps } from "../modelsProps/modelMovie";
 interface Props {
   index: number;
-  item?: any;
+  item?: string;
 }
-// interface movieProps {
-//   _id?: string;
-//   createdAt?: Date;
-//   desc?: string;
-//   genre?: string;
-//   img?: string;
-//   imgTitle?: string;
-//   isSeries?: boolean;
-//   limit?: number;
-//   title?: string;
-//   trailer?: string;
-//   updatedAt?: string;
-//   video?: string;
-//   yeard?: string;
-// }
 const ListItem: React.FC<Props> = ({ index, item }) => {
   const [isHovered, setIsHovered] = useState(false); 
   const [movie, setMovie] = useState<movieItemProps>({});
@@ -39,7 +24,7 @@ const ListItem: React.FC<Props> = ({ index, item }) => {
         {
           headers: {
             token:
-              "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzZTJiMGRhYmJiMThhNGU2Y2ViNWMyNSIsImlzQWRtaW4iOnRydWUsImlhdCI6MTY3NTg5ODY1NywiZXhwIjoxNjc1OTg1MDU3fQ.g5l0cO5KHpoQYPMxRKcNI_0MWpmw_hN9XkOF_jNU9r0",
+              "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzZTJiMGRhYmJiMThhNGU2Y2ViNWMyNSIsImlzQWRtaW4iOnRydWUsImlhdCI6MTY3NTk4NzA3NCwiZXhwIjoxNjc2MDczNDc0fQ.p7E5w8R-a6XD5NT--qkXGXWa0d-i2-S_FexC9zouJDo",
           },
         }
       );
@@ -48,6 +33,8 @@ const ListItem: React.FC<Props> = ({ index, item }) => {
     };
     getMovie();
   }, [item]);
+ 
+
 
   return (
     <Link to={{pathname:'/watch',state:{movie:movie}}}>
@@ -59,8 +46,8 @@ const ListItem: React.FC<Props> = ({ index, item }) => {
           ? { left: index * 225 - 50 + index * 2.5 }
           : { position: "relative" }
       }
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
+      onMouseEnter={() => setIsHovered(true) }
+      onMouseLeave={() =>setIsHovered(false) }
     >
       <img src={movie.img} alt="" />
       {isHovered && (
