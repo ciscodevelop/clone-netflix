@@ -40,6 +40,7 @@
       img {
         width: 30px;
         object-fit: cover;
+        border-radius: 100%;
       }
       cursor: pointer;
       .profile {
@@ -50,6 +51,10 @@
 
           span {
             padding: 10px 10px;
+            &:hover{
+              background: #555;
+              border-radius: 5px;
+            }
           }
         }
         &:hover {

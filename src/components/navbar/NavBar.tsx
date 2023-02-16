@@ -8,13 +8,22 @@ import {
   Notifications,
 } from "@mui/icons-material";
 import { Link } from "react-router-dom";
+import { useAppDispatch } from "../../app/hooks";
+import { reset } from "../featured/auth/authSlice";
 
 const NavBar = () => {
+  
+  const dispatch = useAppDispatch();
+
   const [isScroll, setIsScroll] = useState(false);
   window.onscroll = () => {
     setIsScroll(window.pageYOffset <= 150 ? false : true);
   };
 
+  function handleLogout() {
+   
+    dispatch(reset())
+  }
   return (
     <div className={isScroll ? "navbar scrolled" : "navbar"}>
       <div className="container">
@@ -46,8 +55,8 @@ const NavBar = () => {
           <div className="profile">
             <ArrowDropDown className="icon" />
             <div className="options">
-              <span>Seetting</span>
-              <span>Logout</span>
+              <span>Setting</span>
+              <span onClick={handleLogout} >Logout</span>
             </div>
           </div>
         </div>

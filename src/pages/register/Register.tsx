@@ -1,18 +1,31 @@
 import { useRef, useState } from "react";
 import "./register.scss";
 import { Link } from "react-router-dom";
+ 
+import {   register,reset } from "../../components/featured/auth/authSlice";
+import { useAppDispatch } from "../../app/hooks";
 
 function Register() {
+  const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const usernameRef: any = useRef();
   const emailRef: any = useRef();
   const passwordRef: any = useRef();
+  const dispatch = useAppDispatch();
   function handleStart() {
     setEmail(emailRef.current?.value);
     console.log(password);
   }
-  function handleRegister() {
+  function handleRegister(e:any) {
+    e.preventDefault();
+    setUsername(usernameRef.current?.value);
     setPassword(passwordRef.current?.value);
+    const userData = { username, email, password };
+    console.log(userData);
+    
+    dispatch(register(userData))
+ 
   }
   return (
     <div className="register">
@@ -38,7 +51,8 @@ function Register() {
           </div>
         ) : (
           <form className="content-form">
-            <input type="password" placeholder="password" ref={passwordRef} />
+            <input type="text" placeholder="Username"  value={username} onChange={(e)=> setUsername(e.target.value)} />
+            <input type="password" placeholder="password"  value={password} onChange={(e)=> setPassword(e.target.value)} />
             <button onClick={handleRegister}>Registra</button>
           </form>
         )}

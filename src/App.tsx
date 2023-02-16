@@ -11,9 +11,13 @@ import Home from "./pages/home/Home";
 import Watch from "./pages/watch/Watch";
 import Register from "./pages/register/Register";
 import Login from "./pages/login/Login";
+import { useSelector } from "react-redux";
+import { useAppSelector } from "./app/hooks";
+import { selectUser } from "./components/featured/auth/authSlice";
 
 function App() {
-  const user = true;
+  const user1=useAppSelector(selectUser)
+  const user = user1;
   return (
     <div className="app">
       <Router>
@@ -30,10 +34,10 @@ function App() {
           {user && (
             <>
               <Route path={"/movies"}>
-                <Home type="movies" />
+                <Home type="movie" />
               </Route>
               <Route path={"/series"}>
-                <Home type="crime" />
+                <Home type="series" />
               </Route>
               <Route path={"/watch"}>
                 <Watch />

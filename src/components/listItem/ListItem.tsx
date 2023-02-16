@@ -6,9 +6,9 @@ import {
 } from "@mui/icons-material";
 import "./listItem.scss";
 import { useEffect, useState } from "react";
-import axios from "axios";
 import { Link } from "react-router-dom";
 import { movieItemProps } from "../modelsProps/modelMovie";
+import { Http } from "../../shared/utils/httpWrapper/Http";
 interface Props {
   index: number;
   item?: string;
@@ -19,17 +19,8 @@ const ListItem: React.FC<Props> = ({ index, item }) => {
 
   useEffect(() => {
     const getMovie = async () => {
-      const res = await axios.get(
-        "http://localhost:8800/api/movies/find/" + item,
-        {
-          headers: {
-            token:
-              "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzZTJiMGRhYmJiMThhNGU2Y2ViNWMyNSIsImlzQWRtaW4iOnRydWUsImlhdCI6MTY3NTk4NzA3NCwiZXhwIjoxNjc2MDczNDc0fQ.p7E5w8R-a6XD5NT--qkXGXWa0d-i2-S_FexC9zouJDo",
-          },
-        }
-      );
-      setMovie(res.data);
-      
+      const res = await Http.get(`movies/find/${item}`);
+      setMovie(res);      
     };
     getMovie();
   }, [item]);
