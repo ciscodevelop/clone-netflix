@@ -6,10 +6,20 @@ import { UserModel } from "../../../models/UserModel";
  
 //const key: string | null =  JSON.parse(  localStorage.getItem("user")! );;
 //const myKey = key !== null ? key : "";
-const user:UserModel|undefined =  JSON.parse(  localStorage.getItem("user")! );
+//const user:UserModel|undefined =  JSON.parse(  localStorage.getItem("user")! );
+interface initialStateModel { 
+  user?: UserModel;
+  token: string|undefined,
+  isError: boolean;
+  isSucces: boolean;
+  isLoading: boolean;
+  message: string;
+};
+
  
-const initialState = {
-  user: user ?user: undefined,
+const initialState:initialStateModel = {
+  user: undefined,
+  token: '',
   isError: false,
   isSucces: false,
   isLoading: false,
@@ -27,6 +37,7 @@ export const register = createAsyncThunk ('auth/register', async (user:any,thunk
       
   }    
 })
+//LOGIN
 export const login = createAsyncThunk ('auth/login', async (userData:any,thunkAPI) => {
   try {
     return await authAPI.login(userData)
@@ -48,7 +59,7 @@ export const authSlice = createSlice({
       state.isSucces = false;
       state.isLoading = false;
       state.message = "";
-      state.user = undefined
+      state.user= undefined
       localStorage.removeItem("user");
       localStorage.removeItem("token");
     },
@@ -79,7 +90,9 @@ export const authSlice = createSlice({
             state.isSucces = true;
             state.isLoading = false;
             state.message = "";
-            state.user= actions.payload??undefined
+          state.user = actions.payload
+          state.token=actions.payload?.accessToken
+          
         })
         builder.addCase(login.rejected, (state, actions) => {
             state.isError = true;

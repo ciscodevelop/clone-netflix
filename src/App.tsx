@@ -16,8 +16,10 @@ import { useAppSelector } from "./app/hooks";
 import { selectUser } from "./components/featured/auth/authSlice";
 
 function App() {
-  const user1=useAppSelector(selectUser)
-  const user = user1;
+  const user=useAppSelector(selectUser)
+  
+ 
+  
   return (
     <div className="app">
       <Router>

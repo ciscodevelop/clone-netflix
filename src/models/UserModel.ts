@@ -6,5 +6,5 @@ export interface UserModel {
   isAdmin?: boolean;
   createdAt?: string;
   updatedAt?: string;
-  accesToken?: string;
+  accessToken?: string;
 }

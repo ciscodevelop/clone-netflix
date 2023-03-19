@@ -3,9 +3,10 @@ import ReactDOM from "react-dom/client";
 import "./index.scss";
 import App from "./App";
 import { Provider } from "react-redux";
-import { store } from "./app/store";
+import { persistor, store } from "./app/store";
 import axios from "axios";
 import status401Intceptions from "./interceptor/status401Interception";
+import { PersistGate } from "redux-persist/integration/react";
 axios.interceptors.response.use((config) => config, status401Intceptions);
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
@@ -13,7 +14,9 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <Provider store={store}>
+      <PersistGate loading={null} persistor={persistor}>        
       <App />
+    </PersistGate>
     </Provider>
   </React.StrictMode>
 );

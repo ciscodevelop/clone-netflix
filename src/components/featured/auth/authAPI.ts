@@ -18,8 +18,10 @@ export const register = async (userData: any) => {
 export const login = async (userData: any) => {
   try {
     const res = await Http.post<UserModel>("auth/login", userData);
-    userData && localStorage.setItem("user", JSON.stringify(res) ?? "");
-    userData && localStorage.setItem("token", res.accesToken ?? "");
+      localStorage.setItem("user", JSON.stringify(res) ?? "");
+    localStorage.setItem("token", res.accessToken !!);
+    console.log('accessToken',res);
+    
 
     return res;
   } catch (error) {

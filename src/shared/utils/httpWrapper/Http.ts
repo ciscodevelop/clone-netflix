@@ -1,11 +1,15 @@
 import  axios, { AxiosRequestConfig, AxiosResponse } from "axios";
-
+    import { store } from "../../../app/store";
 export const urlBase = process.env.REACT_APP_URL;
 const getUrl: (url: string) => string=(url:string) =>  {
     return url.startsWith('http') ? url: urlBase+url;
 }
 
 const getConfig = (config: AxiosRequestConfig = {}) => {
+
+//const token= store?.getState()?.auth?.token
+    console.log(localStorage.getItem('token'));
+    
     return {
         ...config,
         headers: {

@@ -47,11 +47,11 @@ const Featured: React.FC<Props> = ({ type ,setGenre }) => {
           </select>
         </div>
       )}
-      <img src={content.img} alt="" />
+      <img src={content?.img} alt="" />
       <div className="info">
-        <img src={content.imgTitle} alt="" />
+        <img src={content?.imgTitle} alt="" />
 
-        <span className="desc">{content.desc}</span>
+        <span className="desc">{content?.desc}</span>
         <div className="buttons">
           <button className="play">
             <PlayArrow />
