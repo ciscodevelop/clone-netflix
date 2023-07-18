@@ -17,7 +17,7 @@ export const register = async (userData: any) => {
 // }
 export const login = async (userData: any) => {
   try {
-    const res = await Http.post<UserModel>("auth/login", userData);
+    const res = await axios.post("auth/login", userData);
       localStorage.setItem("user", JSON.stringify(res) ?? "");
     localStorage.setItem("token", res.accessToken !!);
     console.log('accessToken',res);
